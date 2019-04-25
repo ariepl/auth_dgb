@@ -23,7 +23,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['auth_dgbdescription'] = 'Ermöglicht das Anmelden von Lehrern und Schülern die dgb verwenden';
+$string['auth_dgbdescription'] = 'ErmÃ¶glicht das Anmelden von Lehrern und SchÃ¼lern die dgb verwenden';
 $string['pluginname'] = 'DGB-Authentifizierung';
 $string['select_course_key'] = 'Kursauswahl';
-$string['select_course'] = 'Wählen sie den Kurs aus mit dem diggr verwendet wird';
+$string['select_course'] = 'WÃ¤hlen sie den Kurs aus mit dem diggr verwendet wird';
