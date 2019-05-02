@@ -148,9 +148,8 @@ class auth_plugin_dgb extends auth_plugin_base {
                         $DB->insert_record('cohort_members', array('cohortid' => $record->cohortid, 'userid' => $userid, 'timeadded' => time()));
                         enrol_try_internal_enrol(get_config("auth_{$this->authtype}", 'courseid'), $userid, 5);
                         $DB->insert_record('block_exacompexternaltrainer', array('trainerid' => $record->trainerid, 'studentid' => $userid));
-                    
-                        
-                        return;
+
+                        return true;
                     } else {
                         return error("username already exists");
                     }
