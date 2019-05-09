@@ -132,7 +132,7 @@ class auth_plugin_dgb extends auth_plugin_base {
 
             $cohortcode = optional_param('cohortcode', 0, PARAM_ALPHANUMEXT);
             $username = optional_param('username', 0, PARAM_ALPHANUMEXT);
-            $password = optional_param('password', 0, PARAM_ALPHANUMEXT);
+            $password = optional_param('password', 0, PARAM_TEXT);
 
                 if ($DB->record_exists('block_exacompcohortcode', array('cohortcode' => $cohortcode))) {
                     if (! $DB->record_exists('user', array('username' => $username))) {
