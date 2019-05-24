@@ -27,3 +27,6 @@ $string['auth_dgbdescription'] = 'provides a signup for teachers and students wh
 $string['pluginname'] = 'DGB-authentication';
 $string['select_course_key'] = 'Course selecetion';
 $string['select_course'] = 'Select the course, in which diggr is used';
+
+$string['error_wrong_cohortcode'] = 'wrong cohortcode';
+$string['error_user_exists'] = 'username already exists';

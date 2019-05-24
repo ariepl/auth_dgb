@@ -20,15 +20,16 @@ require_once("$CFG->dirroot/enrol/manual/externallib.php");
 require_once("$CFG->dirroot/group/lib.php");
 
 /**
- * Plugin for kvs
+ * Plugin for dgb
  */
 class auth_plugin_dgb extends auth_plugin_base {
+
 	/**
      * Constructor.
      */
-    function auth_plugin_kvs() {
-        $this->authtype = 'kvs';
-        $this->config = get_config('auth/kvs');
+    public function __construct() {
+        $this->authtype = 'dgb';
+        $this->config = get_config('auth/dgb');
     }
 
     /**
@@ -135,7 +136,7 @@ class auth_plugin_dgb extends auth_plugin_base {
             $password = optional_param('password', 0, PARAM_TEXT);
 
                 if ($DB->record_exists('block_exacompcohortcode', array('cohortcode' => $cohortcode))) {
-                    if (! $DB->record_exists('user', array('username' => $username))) {
+                    if ($username && !$DB->record_exists('user', array('username' => $username))) {
                         $newuser = new stdClass();
                         $newuser->username = $username;
                         $newuser->password = md5($password);
@@ -146,15 +147,15 @@ class auth_plugin_dgb extends auth_plugin_base {
                         $userid = $DB->insert_record('user', $newuser);
                         $record = $DB->get_record('block_exacompcohortcode', array('cohortcode' => $cohortcode));
                         $DB->insert_record('cohort_members', array('cohortid' => $record->cohortid, 'userid' => $userid, 'timeadded' => time()));
-                        enrol_try_internal_enrol(get_config("auth_{$this->authtype}", 'courseid'), $userid, 5);
+                        enrol_try_internal_enrol(get_config('auth_'.$this->authtype, 'courseid'), $userid, 5);
                         $DB->insert_record('block_exacompexternaltrainer', array('trainerid' => $record->trainerid, 'studentid' => $userid));
 
                         return true;
                     } else {
-                        return error("username already exists");
+                        return print_error('error_user_exists', 'auth_dgb');
                     }
                 } else {
-                    return error("wrong cohortcode");
+                    return print_error('error_wrong_cohortcode', 'auth_dgb');
                 }
             }
         }
