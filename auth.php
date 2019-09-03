@@ -123,7 +123,7 @@ class auth_plugin_dgb extends auth_plugin_base {
     function process_config($config) {
         return true;
     }
-	
+
     /**
      * creates a new user and adds the user to a cohort he decided
      */
@@ -139,7 +139,9 @@ class auth_plugin_dgb extends auth_plugin_base {
                     if ($username && !$DB->record_exists('user', array('username' => $username))) {
                         $newuser = new stdClass();
                         $newuser->username = $username;
+                        $newuser->firstname = $username;
                         $newuser->lastname = $username;
+                        $newuser->email = $username.'@'.$username.'.at';
                         $newuser->password = md5($password);
                         $newuser->auth = 'dgb';
                         $newuser->mnethostid = $CFG->mnet_localhost_id;
