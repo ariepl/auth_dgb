@@ -27,6 +27,8 @@ $string['auth_dgbdescription'] = 'ErmÃ¶glicht das Anmelden von Lehrern und Sch
 $string['pluginname'] = 'DGB-Authentifizierung';
 $string['select_course_key'] = 'Kursauswahl';
 $string['select_course'] = 'WÃ¤hlen sie den Kurs aus mit dem diggr verwendet wird';
+$string['context_id'] = 'KontextID';
+$string['context_discription'] = 'KontextID von den globalen Gruppen';
 
 $string['error_wrong_cohortcode'] = 'wrong cohortcode';
 $string['error_user_exists'] = 'username already exists';
