@@ -127,20 +127,19 @@ class auth_plugin_dgb extends auth_plugin_base {
     /**
      * creates a new user and adds the user to a cohort he decided
      */
-	function loginpage_hook(){
-        if (isset($_POST['cohortcode'])) {
+		function loginpage_hook(){
             global $DB, $CFG;
 
-            $cohortcode = optional_param('cohortcode', 0, PARAM_ALPHANUMEXT);
             $username = optional_param('username', 0, PARAM_ALPHANUMEXT);
             $password = optional_param('password', 0, PARAM_TEXT);
+            $firstname = optional_param('firstname', 0, PARAM_TEXT);
+            $lastname = optional_param('lastname', 0, PARAM_TEXT);  
 
-                if ($DB->record_exists('block_exacompcohortcode', array('cohortcode' => $cohortcode))) {
                     if ($username && !$DB->record_exists('user', array('username' => $username))) {
                         $newuser = new stdClass();
                         $newuser->username = $username;
-                        $newuser->firstname = $username;
-                        $newuser->lastname = $username;
+                        $newuser->firstname = $firstname;
+                        $newuser->lastname = $lastname;
                         $newuser->email = $username.'@'.$username.'.at';
                         $newuser->password = md5($password);
                         $newuser->auth = 'dgb';
@@ -148,19 +147,11 @@ class auth_plugin_dgb extends auth_plugin_base {
                         $newuser->confirmed = 1;
                         $newuser->timecreated = time();
                         $userid = $DB->insert_record('user', $newuser);
-                        $record = $DB->get_record('block_exacompcohortcode', array('cohortcode' => $cohortcode));
-                        $DB->insert_record('cohort_members', array('cohortid' => $record->cohortid, 'userid' => $userid, 'timeadded' => time()));
                         enrol_try_internal_enrol(get_config('auth_'.$this->authtype, 'courseid'), $userid, 5);
-                        $DB->insert_record('block_exacompexternaltrainer', array('trainerid' => $record->trainerid, 'studentid' => $userid));
-
                         return true;
                     } else {
                         return print_error('error_user_exists', 'auth_dgb');
                     }
-                } else {
-                    return print_error('error_wrong_cohortcode', 'auth_dgb');
-                }
-            }
         }
    }
 
