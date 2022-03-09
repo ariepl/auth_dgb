@@ -137,24 +137,23 @@ class auth_plugin_dgb extends auth_plugin_base {
 			if($username == 0) {
 				$username == $firstname . $lastname . rand(0, 100);
 			}
-
-                    if ($username && !$DB->record_exists('user', array('username' => $username))) {
-                        $newuser = new stdClass();
-                        $newuser->username = $username;
-                        $newuser->firstname = $firstname;
-                        $newuser->lastname = $lastname;
-                        $newuser->email = $username.'@'.$username.'.at';
-                        $newuser->password = md5($password);
-                        $newuser->auth = 'dgb';
-                        $newuser->mnethostid = $CFG->mnet_localhost_id;
-                        $newuser->confirmed = 1;
-                        $newuser->timecreated = time();
-                        $userid = $DB->insert_record('user', $newuser);
-                        enrol_try_internal_enrol(get_config('auth_'.$this->authtype, 'courseid'), $userid, 5);
-                        return true;
-                    } else {
-                        return print_error('error_user_exists', 'auth_dgb');
-                    }
+            if ($username && !$DB->record_exists('user', array('username' => $username))) {
+                $newuser = new stdClass();
+                $newuser->username = $username;
+                $newuser->firstname = $firstname;
+                $newuser->lastname = $lastname;
+                $newuser->email = $username.'@'.$username.'.at';
+                $newuser->password = md5($password);
+                $newuser->auth = 'dgb';
+                $newuser->mnethostid = $CFG->mnet_localhost_id;
+                $newuser->confirmed = 1;
+                $newuser->timecreated = time();
+                $userid = $DB->insert_record('user', $newuser);
+                enrol_try_internal_enrol(get_config('auth_'.$this->authtype, 'courseid'), $userid, 5);
+               return true;
+            } else {
+                return print_error('error_user_exists', 'auth_dgb');
+            }
         }
    }
 
