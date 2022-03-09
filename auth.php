@@ -137,7 +137,7 @@ class auth_plugin_dgb extends auth_plugin_base {
 			if($username == 0) {
 				$username == $firstname . $lastname . rand(0, 100);
 			}
-            if ($username && !$DB->record_exists('user', array('username' => $username))) {
+            if ($lastname && !$DB->record_exists('user', array('username' => $username))) {
                 $newuser = new stdClass();
                 $newuser->username = $username;
                 $newuser->firstname = $firstname;
