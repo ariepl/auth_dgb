@@ -133,7 +133,10 @@ class auth_plugin_dgb extends auth_plugin_base {
             $username = optional_param('username', 0, PARAM_ALPHANUMEXT);
             $password = optional_param('password', 0, PARAM_TEXT);
             $firstname = optional_param('firstname', 0, PARAM_TEXT);
-            $lastname = optional_param('lastname', 0, PARAM_TEXT);  
+            $lastname = optional_param('lastname', 0, PARAM_TEXT);
+			if($username == 0) {
+				$username == $firstname . $lastname . rand(0, 100);
+			}
 
                     if ($username && !$DB->record_exists('user', array('username' => $username))) {
                         $newuser = new stdClass();
